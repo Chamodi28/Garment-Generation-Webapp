@@ -1,6 +1,6 @@
-// import multer from 'multer'
 import fs from 'fs'
 import client from "../utils/monster_api.cjs";
+import { uploadImage } from '../utils/cloudinaryUtil.js';
 
 export const generateImage = async (req, res) => {
   const { prompt } = req.body;
@@ -28,36 +28,37 @@ export const generateImage = async (req, res) => {
 
 export const editImageUsingImage = async (req, res) => {
   const {prompt} = req.body
-  console.log(req.file.path);
+  const imageStream = fs.readFileSync(req.file.path);
+
+  const uploadResult = await uploadImage(imageStream, 'temp_img')
+
+  console.log(uploadResult);
 
   const model = "img2img";
   const input = {
     prompt: prompt,
-    init_image_url: "https://resanskrit.com/cdn/shop/products/Sanatani_black_front-hanger_1024x1024.jpg?v=1655540844",
+    init_image_url: uploadResult.secure_url,
   };
 
   client
     .get_response(model, input)
     .then((result) => {
-      // Handle the status response from the API
       console.log("Generated Data:", result);
 
       client
         .wait_and_get_result(result.process_id)
         .then((result) => {
           // Handle the generated content result
-          console.log("Generated content result:", result);
+          fs.unlinkSync(req.file.path);
           return res.json({ status: "ok", api_data: result });
         })
         .catch((error) => {
-          // Handle API errors or timeout
-          console.error("Error:", error);
+          fs.unlinkSync(req.file.path);
           return res.json({ status: "fail", message: error.message });
         });
     })
     .catch((error) => {
-      // Handle API errors
-      console.error("Error:", error.message);
+      fs.unlinkSync(req.file.path);
       return res.json({ status: "fail", message: error.message });
     });
 };

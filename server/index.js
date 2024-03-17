@@ -2,7 +2,6 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-// import bodyParser from "body-parser";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -23,6 +22,7 @@ mongoose
 
 // middlewares
 app.use(express.json());
+// app.use(express.static('./public'));
 app.use(
   cors({
     origin: [process.env.ORIGIN],
@@ -30,7 +30,6 @@ app.use(
   })
 );
 app.use(cookieParser());
-// app.use(bodyParser.urlencoded({limit: '40mb'}))
 app.use((req, res, next) => {
   console.log(req.method, req.path);
   next();
