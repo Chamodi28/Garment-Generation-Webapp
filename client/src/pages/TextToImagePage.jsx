@@ -56,8 +56,8 @@ export const TextToImagePage = () => {
   };
 
   return (
-    <div className="w-screen h-screen  bg-slate-300 pt-10">
-      <h1 className="text-4xl font-extrabold text-center pb-8">
+    <div className="w-screen h-screen pt-10  bg-gradient-to-r from-blue-400 to-purple-900">
+      <h1 className= 'text-white text-5xl font-futura text-center mb-10'>
         Generate Image
       </h1>
 
@@ -89,7 +89,7 @@ export const TextToImagePage = () => {
           {imageData && 
          ( 
           <div className="flex-col justify-center items-center">
-            <img src={`data:image/png;base64,${imageData}`} className="h-[450px] w-full" alt="generated-image" />
+            <img src={`data:image/png;base64,${imageData}`} className=" h-[250px] w-[250px] mx-auto" alt="generated-image" />
             <div className="flex justify-center items-center mt-3">
               <button
                 onClick={handleDownload}

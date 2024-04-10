@@ -69,19 +69,20 @@ export const DetailedImageToImageEditing = () => {
       downloadLink.click();
     }
   };
-
+// h-1/6 -->  h-1/7 mt-6 
   return (
-    <div className="w-screen h-screen  bg-slate-300 pt-10">
-      <h1 className="text-4xl font-extrabold text-center">
+    <div className="w-screen h-screen pt-6  bg-gradient-to-r from-purple-500 to-blue-300"> 
+      <h1 className="text-white text-5xl font-futura text-center ">
         Edit Image in Detail
       </h1>
-      <div className="w-full h-1/5 flex justify-center items-center">
-        <div className="flex items-center justify-center w-1/2">
+      <div className="w-full h-1/7 mt-6 flex justify-center items-center">
+        <div className="flex items-center justify-center w-1/2 text-white">
           <input type="file" onChange={handleImageChange} />
         </div>
       </div>
 
-      <div className="flex-col items-center justify-center">
+      <div className="flex-col mt-5 items-center justify-center">
+
         <div className="flex justify-center items-center">
           <textarea
             type="text"
@@ -89,10 +90,12 @@ export const DetailedImageToImageEditing = () => {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="Describe what you want to generate here..."
-            rows="4"
+            rows="3"
             className="w-1/3 p-3 mx-20 text-sm rounded-lg border bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
           />
         </div>
+
+  
         <div className="flex items-center justify-center mt-4">
           <button
             onClick={handleClick}
@@ -104,10 +107,10 @@ export const DetailedImageToImageEditing = () => {
         </div>
       </div>
 
-      <div className="w-full h-1/2 flex justify-center items-center">
+      <div className="w-full h-1/3 flex justify-center items-center">
         <div className="w-1/3 h-3/4 mx-5">
           {imageUrl &&
-            <img src={imageUrl} className="h-[450px] w-full" alt="uploaded-image" />
+            <img src={imageUrl} className="h-[250px] w-[250px]" alt="uploaded-image" />
           }
         </div>
         <div className="w-1/3 h-3/4 mx-5">
@@ -115,7 +118,7 @@ export const DetailedImageToImageEditing = () => {
             <div className="flex-col justify-center items-center">
               <img
                 src={`data:image/png;base64,${imageData}`}
-                className="h-[450px] w-full"
+                className="h-[250px] w-[250px]"
                 alt="generated-image"
               />
               <div className="flex justify-center items-center mt-3">
