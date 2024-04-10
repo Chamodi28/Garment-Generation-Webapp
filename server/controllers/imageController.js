@@ -24,7 +24,6 @@ export const generateImage = async (req, res) => {
       guidance: 9,
       prompt: prompt,
     })
-//     body: JSON.stringify({ prompt: prompt }),
 
   };
 
@@ -56,7 +55,6 @@ export const editImageUsingImage = async (req, res) => {
     guidance_scale: 12.5,
     image_guidance_scale: 1.5,
     seed: 2414,
-    //// changed here
   };
 
   client
@@ -107,8 +105,6 @@ export const detailEditImageUsingImage = async (req, res) => {
       scheduler: 'euler'                 // 'dpmsolver++', // 'lms' 'euler' ,
       
       }),
-
-//       body: JSON.stringify({ prompt: prompt, image: base64Image});
 
 
     };
